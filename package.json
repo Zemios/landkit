@@ -4,9 +4,11 @@
   "description": "Zemios design system — Angular building blocks shared across all Zemios products.",
   "type": "module",
   "main": "./src/public-api.ts",
+  "module": "./src/public-api.ts",
   "exports": {
     ".": {
-      "types": "./src/public-api.ts"
+      "types": "./src/public-api.ts",
+      "default": "./src/public-api.ts"
     }
   },
   "files": ["src"],
