@@ -1,0 +1,84 @@
+/* === HERO SECTION ========================================= */
+
+/* Floating Animations */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 8s ease-in-out infinite;
+}
+
+/* Hero Logo */
+.hero-logo {
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+  animation: logo-breathe 4s ease-in-out infinite;
+}
+
+@keyframes logo-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.15));
+  }
+}
+
+/* Neon Orb Styles */
+.neon-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.orb-purple {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+}
+
+.orb-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, transparent 70%);
+}
+
+.orb-magenta {
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.8) 0%, transparent 70%);
+}
+
+/* Warm Orb Styles */
+.warm-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.orb-orange {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.7) 0%, transparent 70%);
+}
+
+.orb-red {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.7) 0%, transparent 70%);
+}
+
+.orb-yellow {
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.7) 0%, transparent 70%);
+}

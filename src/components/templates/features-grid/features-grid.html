@@ -1,0 +1,54 @@
+<!-- OUR CORE - Open layout with Lottie placeholders -->
+<section style="position: relative; overflow: hidden; padding: 7rem 0">
+  <div style="max-width: 80rem; margin: 0 auto; padding: 0 1.5rem">
+    <div class="features-grid" style="display: grid; gap: 4rem; grid-template-columns: 1fr">
+      @for (feature of features; track feature.title; let i = $index) {
+      <div
+        data-aos="fade-up"
+        [attr.data-aos-delay]="feature.delay"
+        style="display: flex; flex-direction: column; align-items: center; text-align: center"
+      >
+        <!-- Lottie animation -->
+        <div
+          style="
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+          "
+        >
+          <dotlottie-wc [attr.src]="feature.lottieFile" autoplay loop></dotlottie-wc>
+        </div>
+
+        <!-- Title -->
+        <h3
+          style="
+            font-family: &quot;Outfit&quot;, sans-serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin: 0 0 0.875rem 0;
+            letter-spacing: -0.01em;
+          "
+        >
+          {{ feature.title | translate }}
+        </h3>
+
+        <!-- Description -->
+        <p
+          style="font-size: 0.9375rem; line-height: 1.75; color: #64748b; margin: 0; font-weight: 300; max-width: 24rem"
+        >
+          {{ feature.description | translate }}
+        </p>
+
+        <!-- Subtle separator (not on last item) -->
+        <div style="width: 40px; height: 1px; background: rgba(255, 255, 255, 0.06); margin-top: 3rem"></div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

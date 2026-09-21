@@ -1,0 +1,77 @@
+<section class="hero-mobile-section relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20">
+  <!-- Background Orbs -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      class="neon-orb orb-purple animate-float-slow top-[-80px] left-[-80px] h-[350px] w-[350px] opacity-70 blur-[50px]"
+    ></div>
+    <div
+      class="neon-orb orb-cyan animate-float-slower right-[-50px] bottom-[-50px] h-[300px] w-[300px] opacity-70 blur-[50px]"
+    ></div>
+    <div
+      class="neon-orb orb-magenta animate-float-slow top-[30%] right-[10%] h-[250px] w-[250px] opacity-80 blur-[50px]"
+    ></div>
+    <div
+      class="warm-orb orb-orange animate-float-slower top-[60%] left-[-60px] h-[280px] w-[280px] opacity-70 blur-[50px]"
+    ></div>
+    <div
+      class="warm-orb orb-red animate-float-slow right-[10%] bottom-[20%] h-[220px] w-[220px] opacity-70 blur-[50px]"
+    ></div>
+    <div
+      class="warm-orb orb-yellow animate-float-slower top-[10%] right-[-50px] h-[200px] w-[200px] opacity-70 blur-[50px]"
+    ></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="relative z-10 w-full text-center" data-aos="fade-in" data-aos-duration="1500">
+    <!-- Badge -->
+    <span
+      class="mb-6 inline-block rounded-full border border-slate-700/50 bg-slate-900/60 px-3 py-1 text-[10px] font-medium tracking-[0.25em] text-slate-400 uppercase backdrop-blur-sm"
+      >Digital Future</span
+    >
+
+    <!-- Brand SVG -->
+    <img src="images/zemios_title_simple.svg" alt="ZEMIOS" class="hero-logo mx-auto mb-8 h-auto w-[55vw]" />
+
+    <!-- Headline -->
+    <h1
+      class="mx-auto mb-5 text-3xl leading-tight font-semibold tracking-tight text-white"
+      style="font-family: &quot;Outfit&quot;, sans-serif"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      {{ 'hero.headline' | translate }}
+      <span
+        style="
+          background: linear-gradient(135deg, #60a5fa, #a78bfa);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        "
+        >{{ 'hero.headlineAccent' | translate }}</span
+      >
+    </h1>
+
+    <!-- Subtitle -->
+    <p
+      class="mx-auto max-w-sm text-base leading-relaxed font-light text-slate-400"
+      style="font-family: &quot;Outfit&quot;, sans-serif"
+      data-aos="fade-up"
+      data-aos-delay="500"
+    >
+      {{ 'hero.subtitle' | translate }}
+    </p>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div
+    class="absolute bottom-8 flex flex-col items-center gap-2 opacity-40"
+    data-aos="fade-up"
+    data-aos-delay="1000"
+    data-aos-offset="-200"
+  >
+    <span class="text-[8px] font-medium tracking-[0.3em] text-slate-500 uppercase"
+      >{{ 'hero.scrollMobile' | translate }}</span
+    >
+    <i class="bi bi-hand-index animate-bounce text-2xl text-slate-400"></i>
+  </div>
+</section>

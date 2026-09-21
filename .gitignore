@@ -1,0 +1,22 @@
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build artifacts
+/dist
+/tmp
+/out-tsc
+
+# IDEs and editors
+.idea/
+.vscode/*
+.history/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
