@@ -1,10 +1,20 @@
 {
   "name": "@zemios/landkit",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Zemios design system — Angular building blocks, design tokens and brand primitives shared by every Zemios product (Atlas, Edubot, Cronos, Nebula, even2me…).",
   "type": "module",
   "main": "./dist/fesm2022/zemios-landkit.mjs",
   "module": "./dist/fesm2022/zemios-landkit.mjs",
+  "types": "./dist/types/zemios-landkit.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/zemios-landkit.d.ts",
+      "default": "./dist/fesm2022/zemios-landkit.mjs"
+    },
+    "./package.json": "./package.json",
+    "./README.md": "./README.md",
+    "./STYLE_GUIDE.md": "./STYLE_GUIDE.md"
+  },
   "files": ["dist", "README.md", "STYLE_GUIDE.md"],
   "private": false,
   "sideEffects": false,
