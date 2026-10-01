@@ -363,11 +363,12 @@ export class CardComponent implements OnInit {
   @Input() layout: CardLayout = 'vertical'
   @Input() clickable = false
 
-  /** CTA-specific props */
+  /** CTA-specific props. `ctaRouterLink` is a single path segment because it is
+   *  forwarded to `z-button`, whose own `routerLink` input accepts `string`. */
   @Input() ctaType?: CardCtaType
   @Input() ctaLabel?: string
   @Input() ctaHref?: string
-  @Input() ctaRouterLink?: string | string[]
+  @Input() ctaRouterLink?: string
   @Input() ctaIcon?: string
   @Input() ctaVariant: ButtonVariants = 'base'
 
