@@ -5,9 +5,12 @@ yarn-error.log
 pnpm-debug.log
 
 # Build artifacts
+# OJO: /dist esta ignorado, pero sus 6 ficheros estan versionados a proposito
+# (el paquete se consume desde git). Ver ARCHITECTURE.md, seccion "Artefactos".
 /dist
 /tmp
 /out-tsc
+/jscpd-report
 
 # IDEs and editors
 .idea/
