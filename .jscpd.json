@@ -1,0 +1,24 @@
+{
+  "minLines": 5,
+  "minTokens": 50,
+  "mode": "mild",
+  "gitignore": true,
+  "crossFormats": [["javascript", "typescript"]],
+  "ignore": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/coverage/**",
+    "**/.next/**",
+    "**/*.test.ts",
+    "**/__snapshots__/**",
+    "**/openspec/**",
+    "**/docs/**",
+    "**/*.md",
+    "**/*.css"
+  ],
+  "baseline": ".jscpd-baseline.json",
+  "failOnNewClones": 0,
+  "failOnEmpty": true,
+  "reporters": ["console", "json"],
+  "output": "./jscpd-report"
+}
