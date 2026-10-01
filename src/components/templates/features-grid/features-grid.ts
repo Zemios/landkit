@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, PLATFORM_ID } from '@angular/core'
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, inject, PLATFORM_ID } from '@angular/core'
 import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
 
@@ -28,7 +28,8 @@ import { TranslateModule } from '@ngx-translate/core'
   ]
 })
 export class FeaturesGridComponent implements AfterViewInit {
-  private isBrowser: boolean
+  private platformId = inject(PLATFORM_ID)
+  private isBrowser = isPlatformBrowser(this.platformId)
 
   features = [
     {
@@ -53,10 +54,6 @@ export class FeaturesGridComponent implements AfterViewInit {
       delay: 300
     }
   ]
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {
-    this.isBrowser = isPlatformBrowser(this.platformId)
-  }
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {

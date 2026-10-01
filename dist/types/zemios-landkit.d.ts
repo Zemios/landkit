@@ -81,7 +81,6 @@ declare class FeaturesGridComponent implements AfterViewInit {
         rgbColor: string;
         delay: number;
     }[];
-    constructor(platformId: object);
     ngAfterViewInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<FeaturesGridComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<FeaturesGridComponent, "z-features-grid", never, {}, {}, never, never, true, never>;

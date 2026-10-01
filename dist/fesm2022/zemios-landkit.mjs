@@ -1,7 +1,7 @@
 import * as i1 from '@angular/common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Input, Component, ChangeDetectionStrategy, PLATFORM_ID, Inject, CUSTOM_ELEMENTS_SCHEMA, HostListener, HostBinding, Directive } from '@angular/core';
+import { Input, Component, ChangeDetectionStrategy, inject, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA, HostListener, HostBinding, Directive } from '@angular/core';
 import * as i2 from '@angular/router';
 import { RouterModule } from '@angular/router';
 import * as i1$1 from '@ngx-translate/core';
@@ -270,8 +270,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.2.23", ngImpo
         }] });
 
 class FeaturesGridComponent {
-    platformId;
-    isBrowser;
+    platformId = inject(PLATFORM_ID);
+    isBrowser = isPlatformBrowser(this.platformId);
     features = [
         {
             lottieFile: 'lotties/architecture.lottie',
@@ -295,25 +295,18 @@ class FeaturesGridComponent {
             delay: 300
         }
     ];
-    constructor(platformId) {
-        this.platformId = platformId;
-        this.isBrowser = isPlatformBrowser(this.platformId);
-    }
     ngAfterViewInit() {
         if (this.isBrowser) {
             import('@lottiefiles/dotlottie-wc');
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, deps: [{ token: PLATFORM_ID }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "21.2.23", type: FeaturesGridComponent, isStandalone: true, selector: "z-features-grid", ngImport: i0, template: "<!-- OUR CORE - Open layout with Lottie placeholders -->\r\n<section style=\"position: relative; overflow: hidden; padding: 7rem 0\">\r\n  <div style=\"max-width: 80rem; margin: 0 auto; padding: 0 1.5rem\">\r\n    <div class=\"features-grid\" style=\"display: grid; gap: 4rem; grid-template-columns: 1fr\">\r\n      @for (feature of features; track feature.title; let i = $index) {\r\n      <div\r\n        data-aos=\"fade-up\"\r\n        [attr.data-aos-delay]=\"feature.delay\"\r\n        style=\"display: flex; flex-direction: column; align-items: center; text-align: center\"\r\n      >\r\n        <!-- Lottie animation -->\r\n        <div\r\n          style=\"\r\n            width: 200px;\r\n            height: 200px;\r\n            margin-bottom: 2rem;\r\n            border-radius: 28px;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            overflow: hidden;\r\n          \"\r\n        >\r\n          <dotlottie-wc [attr.src]=\"feature.lottieFile\" autoplay loop></dotlottie-wc>\r\n        </div>\r\n\r\n        <!-- Title -->\r\n        <h3\r\n          style=\"\r\n            font-family: &quot;Outfit&quot;, sans-serif;\r\n            font-size: 1.375rem;\r\n            font-weight: 600;\r\n            color: #f8fafc;\r\n            margin: 0 0 0.875rem 0;\r\n            letter-spacing: -0.01em;\r\n          \"\r\n        >\r\n          {{ feature.title | translate }}\r\n        </h3>\r\n\r\n        <!-- Description -->\r\n        <p\r\n          style=\"font-size: 0.9375rem; line-height: 1.75; color: #64748b; margin: 0; font-weight: 300; max-width: 24rem\"\r\n        >\r\n          {{ feature.description | translate }}\r\n        </p>\r\n\r\n        <!-- Subtle separator (not on last item) -->\r\n        <div style=\"width: 40px; height: 1px; background: rgba(255, 255, 255, 0.06); margin-top: 3rem\"></div>\r\n      </div>\r\n      }\r\n    </div>\r\n  </div>\r\n</section>\r\n", styles: ["@media(min-width:768px){.features-grid{grid-template-columns:repeat(3,1fr)!important}}.feature-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -12px #00000080;border-color:#ffffff1a!important}dotlottie-wc{width:100%;height:100%}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "ngmodule", type: TranslateModule }, { kind: "pipe", type: i1$1.TranslatePipe, name: "translate" }] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, decorators: [{
             type: Component,
             args: [{ selector: 'z-features-grid', standalone: true, imports: [CommonModule, TranslateModule], schemas: [CUSTOM_ELEMENTS_SCHEMA], template: "<!-- OUR CORE - Open layout with Lottie placeholders -->\r\n<section style=\"position: relative; overflow: hidden; padding: 7rem 0\">\r\n  <div style=\"max-width: 80rem; margin: 0 auto; padding: 0 1.5rem\">\r\n    <div class=\"features-grid\" style=\"display: grid; gap: 4rem; grid-template-columns: 1fr\">\r\n      @for (feature of features; track feature.title; let i = $index) {\r\n      <div\r\n        data-aos=\"fade-up\"\r\n        [attr.data-aos-delay]=\"feature.delay\"\r\n        style=\"display: flex; flex-direction: column; align-items: center; text-align: center\"\r\n      >\r\n        <!-- Lottie animation -->\r\n        <div\r\n          style=\"\r\n            width: 200px;\r\n            height: 200px;\r\n            margin-bottom: 2rem;\r\n            border-radius: 28px;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            overflow: hidden;\r\n          \"\r\n        >\r\n          <dotlottie-wc [attr.src]=\"feature.lottieFile\" autoplay loop></dotlottie-wc>\r\n        </div>\r\n\r\n        <!-- Title -->\r\n        <h3\r\n          style=\"\r\n            font-family: &quot;Outfit&quot;, sans-serif;\r\n            font-size: 1.375rem;\r\n            font-weight: 600;\r\n            color: #f8fafc;\r\n            margin: 0 0 0.875rem 0;\r\n            letter-spacing: -0.01em;\r\n          \"\r\n        >\r\n          {{ feature.title | translate }}\r\n        </h3>\r\n\r\n        <!-- Description -->\r\n        <p\r\n          style=\"font-size: 0.9375rem; line-height: 1.75; color: #64748b; margin: 0; font-weight: 300; max-width: 24rem\"\r\n        >\r\n          {{ feature.description | translate }}\r\n        </p>\r\n\r\n        <!-- Subtle separator (not on last item) -->\r\n        <div style=\"width: 40px; height: 1px; background: rgba(255, 255, 255, 0.06); margin-top: 3rem\"></div>\r\n      </div>\r\n      }\r\n    </div>\r\n  </div>\r\n</section>\r\n", styles: ["@media(min-width:768px){.features-grid{grid-template-columns:repeat(3,1fr)!important}}.feature-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -12px #00000080;border-color:#ffffff1a!important}dotlottie-wc{width:100%;height:100%}\n"] }]
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [PLATFORM_ID]
-                }] }] });
+        }] });
 
 class ProcessComponent {
     steps = [
