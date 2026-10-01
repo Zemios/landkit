@@ -1,0 +1,74 @@
+name: CI
+
+# Consumers install this package directly from GitHub
+# (`"@zemios/landkit": "github:Zemios/landkit"`), so there is no registry
+# step where a broken build is caught before it lands. A red build here breaks
+# every consumer's install, which is why dist/ is committed and why this
+# workflow fails when dist/ drifts from source.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: lint + test + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint (tsc --noEmit)
+        run: pnpm lint
+
+      - name: Test (vitest)
+        run: pnpm test
+
+      - name: Build (ng-packagr)
+        run: pnpm build
+
+      # dist/ is committed on purpose so that a `github:` install works, so it
+      # must never lag behind src/. Rebuilding and diffing is the only way to
+      # enforce that, because nothing else in the pipeline would notice.
+      - name: Verify committed dist/ matches a fresh build
+        run: |
+          if ! git diff --exit-code --stat dist; then
+            echo "::error::dist/ is out of date. Run 'pnpm build' and commit the result."
+            git diff --stat dist
+            exit 1
+          fi
+
+      - name: Verify the packed artifact actually resolves
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          npm pack --pack-destination "$tmp" > /dev/null
+          mkdir "$tmp/app"
+          cd "$tmp/app"
+          printf '{ "name": "consumer", "version": "1.0.0", "type": "module", "private": true }' > package.json
+          npm install "$tmp"/*.tgz --legacy-peer-deps --no-audit --no-fund > /dev/null
+          # Every documented subpath must resolve through the exports map.
+          node --input-type=module -e "
+            import { createRequire } from 'node:module';
+            const req = createRequire(import.meta.url);
+            for (const s of ['@zemios/landkit', '@zemios/landkit/package.json',
+                             '@zemios/landkit/tokens', '@zemios/landkit/README.md',
+                             '@zemios/landkit/STYLE_GUIDE.md']) {
+              console.log('resolved', s, '->', req.resolve(s));
+            }
+          "
