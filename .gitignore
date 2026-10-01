@@ -5,7 +5,11 @@ yarn-error.log
 pnpm-debug.log
 
 # Build artifacts
-/dist
+# NOTE: /dist is deliberately NOT ignored. It is tracked on purpose because
+# consumers install this package directly from GitHub
+# (`"@zemios/landkit": "github:Zemios/landkit"`), so the committed dist/ is
+# the only artifact they receive. CI fails the build if dist/ drifts from
+# source (`pnpm build && git diff --exit-code dist`).
 /tmp
 /out-tsc
 

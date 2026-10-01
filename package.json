@@ -11,9 +11,18 @@
       "types": "./dist/types/zemios-landkit.d.ts",
       "default": "./dist/fesm2022/zemios-landkit.mjs"
     },
-    "./package.json": "./package.json",
-    "./README.md": "./README.md",
-    "./STYLE_GUIDE.md": "./STYLE_GUIDE.md"
+    "./tokens": {
+      "default": "./dist/tokens/zemios.css"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    },
+    "./README.md": {
+      "default": "./README.md"
+    },
+    "./STYLE_GUIDE.md": {
+      "default": "./STYLE_GUIDE.md"
+    }
   },
   "files": ["dist", "README.md", "STYLE_GUIDE.md"],
   "private": false,
