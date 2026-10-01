@@ -11,7 +11,9 @@
       "types": "./dist/types/zemios-landkit.d.ts",
       "default": "./dist/fesm2022/zemios-landkit.mjs"
     },
-    "./package.json": "./package.json",
+    "./package.json": {
+      "default": "./package.json"
+    },
     "./README.md": "./README.md",
     "./STYLE_GUIDE.md": "./STYLE_GUIDE.md"
   },
@@ -20,6 +22,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "tsc --noEmit -p tsconfig.json",
     "check": "tsc --noEmit -p tsconfig.json",
     "prepublishOnly": "npm run build",
