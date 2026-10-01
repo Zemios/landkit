@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@zemios/landkit · Design System Demo</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- The tokens. In a real consumer project: @import '@zemios/landkit/tokens.css' -->
+    <link rel="stylesheet" href="../src/tokens/zemios.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <header class="demo-topbar">
+      <div class="demo-topbar__inner">
+        <a href="#" class="demo-topbar__brand">
+          <span class="demo-logo-mark"></span>
+          <span>Landkit <small>· Zemios Design System</small></span>
+        </a>
+
+        <div class="demo-theme-toggle">
+          <button data-set-theme="light" class="is-active">
+            <i class="bi bi-sun"></i> Light
+          </button>
+          <button data-set-theme="dark">
+            <i class="bi bi-moon-stars"></i> Dark
+          </button>
+          <button data-set-theme="neon">
+            <i class="bi bi-lightning-charge"></i> Neon
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="demo-shell">
+      <aside class="demo-side">
+        <nav>
+          <a href="#intro">Intro</a>
+          <a href="#colores">Colores</a>
+          <a href="#tipografia">Tipografía</a>
+          <a href="#tokens">Tokens</a>
+          <a href="#botones">Botones</a>
+          <a href="#tarjetas">Tarjetas</a>
+          <a href="#inputs">Inputs</a>
+          <a href="#gradientes">Gradientes</a>
+        </nav>
+      </aside>
+
+      <article class="demo-content">
+        <section id="intro" class="demo-section">
+          <span class="demo-eyebrow">Design System · v0.2.0</span>
+          <h1 class="demo-h1">
+            Un solo lenguaje visual para todos los productos Zemios
+          </h1>
+          <p class="demo-lead">
+            Esta página es un catálogo vivo de <code>@zemios/landkit</code>.
+            Carga solo los tokens CSS — todo lo que ves sale de
+            <code>var(--zemios-*)</code>. La meta: que un nuevo proyecto
+            tenga la marca Zemios desde el primer import.
+          </p>
+          <div class="demo-callout">
+            <strong>Cómo se usa:</strong>
+            <code>@import '@zemios/landkit/tokens.css';</code> en
+            <code>styles.css</code>. Después, importas los componentes
+            Angular que necesites. Eso es todo.
+          </div>
+        </section>
+
+        <section id="colores" class="demo-section">
+          <h2 class="demo-h2">Paleta de marca</h2>
+          <p class="demo-desc">
+            Cuatro escalas de marca, una neutra (slate) y una paleta neón
+            para landings premium. Cada color tiene 11 paradas (50 → 950).
+          </p>
+
+          <div id="color-scales"></div>
+        </section>
+
+        <section id="tipografia" class="demo-section">
+          <h2 class="demo-h2">Tipografía</h2>
+
+          <div class="demo-grid-3">
+            <div class="demo-card">
+              <span class="demo-tag">Display</span>
+              <p class="demo-font-name">Outfit</p>
+              <p class="demo-muted"><code>--zemios-font-display</code></p>
+              <h2 class="demo-font-display">Zemios</h2>
+              <p class="demo-font-display-muted">Arte Digital · Premium Tech</p>
+            </div>
+            <div class="demo-card">
+              <span class="demo-tag">Cuerpo</span>
+              <p class="demo-font-name">Inter</p>
+              <p class="demo-muted"><code>--zemios-font-body</code></p>
+              <p>
+                Texto base — Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Sed do eiusmod tempor incididunt.
+              </p>
+              <p class="demo-muted" style="font-size: 0.875rem">
+                Texto pequeño para notas y metadatos.
+              </p>
+            </div>
+            <div class="demo-card">
+              <span class="demo-tag">Mono</span>
+              <p class="demo-font-name">JetBrains Mono</p>
+              <p class="demo-muted"><code>--zemios-font-mono</code></p>
+              <pre class="demo-pre">const brand = '--zemios-accent';</pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="tokens" class="demo-section">
+          <h2 class="demo-h2">Design tokens</h2>
+          <p class="demo-desc">
+            Espaciado, radios, sombras, motion. Cada token se resuelve a
+            un valor concreto bajo el tema activo.
+          </p>
+          <div id="tokens-tables"></div>
+        </section>
+
+        <section id="botones" class="demo-section">
+          <h2 class="demo-h2">Botones</h2>
+          <p class="demo-desc">
+            Variantes del botón Zemios: pill, brand, prism y circle.
+          </p>
+          <div class="demo-preview">
+            <button class="btn btn--base">.btn .btn--base</button>
+            <button class="btn btn--primary">Primary</button>
+            <button class="btn btn--accent">Accent</button>
+            <button class="btn btn--light">Light</button>
+            <button class="btn btn--danger">Danger</button>
+            <button class="btn btn--outline">Outline</button>
+            <button class="btn btn--ghost">Ghost</button>
+          </div>
+          <div class="demo-preview">
+            <button class="btn btn--prism-primary">Prism Primary</button>
+            <button class="btn btn--prism-outline">Prism Outline</button>
+            <button class="btn btn--prism-ghost">Prism Ghost</button>
+            <button class="btn btn--circle"><i class="bi bi-arrow-right"></i></button>
+            <button class="btn btn--social"><i class="bi bi-github"></i></button>
+          </div>
+        </section>
+
+        <section id="tarjetas" class="demo-section">
+          <h2 class="demo-h2">Tarjetas</h2>
+          <div class="demo-cards-grid">
+            <article class="demo-card-static">
+              <h3>Default</h3>
+              <p>Superficie blanca con borde sutil y radius-token-sm.</p>
+            </article>
+            <article class="demo-card-static demo-card-static--outline">
+              <h3>Outline</h3>
+              <p>Sin fondo, solo borde definido.</p>
+            </article>
+            <article class="demo-card-static demo-card-static--cta">
+              <h3>CTA</h3>
+              <p>Tema marketing: fondo brand-violet suave.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="inputs" class="demo-section">
+          <h2 class="demo-h2">Inputs</h2>
+          <div class="demo-form-grid">
+            <label class="demo-input-field">
+              <span class="demo-input-field__label">Email <span>*</span></span>
+              <input
+                class="demo-input"
+                type="email"
+                placeholder="hola@zemios.com"
+              />
+              <span class="demo-input-field__hint">No compartiremos tu correo.</span>
+            </label>
+            <label class="demo-input-field">
+              <span class="demo-input-field__label">Con error</span>
+              <input
+                class="demo-input demo-input--error"
+                placeholder="..."
+                value="valor"
+              />
+              <span class="demo-input-field__error">Este campo es obligatorio.</span>
+            </label>
+            <label class="demo-input-field">
+              <span class="demo-input-field__label">Búsqueda</span>
+              <input class="demo-input" placeholder="Busca algo…" />
+            </label>
+          </div>
+        </section>
+
+        <section id="gradientes" class="demo-section">
+          <h2 class="demo-h2">Gradientes</h2>
+          <div class="demo-gradient-grid">
+            <div class="demo-gradient demo-gradient--brand">
+              <span>brand</span><code>--zemios-gradient-brand</code>
+            </div>
+            <div class="demo-gradient demo-gradient--sunset">
+              <span>sunset</span><code>--zemios-gradient-sunset</code>
+            </div>
+            <div class="demo-gradient demo-gradient--ocean">
+              <span>ocean</span><code>--zemios-gradient-ocean</code>
+            </div>
+            <div class="demo-gradient demo-gradient--neon">
+              <span>neon</span><code>--zemios-gradient-neon</code>
+            </div>
+            <div class="demo-gradient demo-gradient--text">
+              <span class="z-text-brand-gradient">text gradient</span>
+              <code>--zemios-gradient-text</code>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="demo-footer">
+      <p>
+        <strong>@zemios/landkit</strong> · el design system oficial de la
+        compañía. Construido con <code>var(--zemios-*)</code>.
+      </p>
+      <p>
+        Made with <span class="demo-heart">♥</span> by Zemios · esta página
+        es <code>demo/index.html</code> y solo carga los tokens.
+      </p>
+    </footer>
+
+    <script src="./demo.js"></script>
+  </body>
+</html>

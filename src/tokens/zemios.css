@@ -1,0 +1,589 @@
+/*
+ * @zemios/landkit — Design Tokens (single source of truth)
+ * ──────────────────────────────────────────────────────────────────
+ * Every Zemios product (Atlas, Edubot, Cronos, Nebula, even2me,
+ * minerva…) consumes this stylesheet so the brand stays consistent:
+ * the same sky/violet/gold scales, the same radii, the same shadows,
+ * the same Outfit/Inter pairing, the same durations.
+ *
+ * Usage in any Angular / web project:
+ *
+ *   /* in src/styles.css *
+ *   @import '@zemios/landkit/tokens';
+ *
+ * The tokens are exposed as CSS custom properties (`--zemios-*`) so
+ * they can be read from templates, SCSS and runtime JS.
+ *
+ * Three themes ship out of the box:
+ *   - default (light, brand violet-on-light surface)
+ *   - dark    (`[data-theme="dark"]` or `.dark` selector)
+ *   - neon    (`[data-theme="neon"]`, premium dark hero aesthetic)
+ *
+ * Apps that need their own accent (e.g. even2me deep blue) override
+ * the `--zemios-primary-*` and `--zemios-accent-*` blocks locally.
+ *
+ * Backwards-compat aliases for `--nebula-*` and `--zds-*` are kept at
+ * the bottom so existing components keep rendering while migrations
+ * happen.
+ */
+
+:root {
+  /* ── Brand · Sky (primary) ──────────────────────────────────── */
+  --zemios-sky-50:  #f0f9ff;
+  --zemios-sky-100: #e0f2fe;
+  --zemios-sky-200: #bae6fd;
+  --zemios-sky-300: #7dd3fc;
+  --zemios-sky-400: #38bdf8;
+  --zemios-sky-500: #0ea5e9;
+  --zemios-sky-600: #0284c7;
+  --zemios-sky-700: #0369a1;
+  --zemios-sky-800: #075985;
+  --zemios-sky-900: #0c4a6e;
+  --zemios-sky-950: #082f49;
+
+  /* ── Brand · Violet (accent) ────────────────────────────────── */
+  --zemios-violet-50:  #f5f3ff;
+  --zemios-violet-100: #ede9fe;
+  --zemios-violet-200: #ddd6fe;
+  --zemios-violet-300: #c4b5fd;
+  --zemios-violet-400: #a78bfa;
+  --zemios-violet-500: #8b5cf6;
+  --zemios-violet-600: #7c3aed;
+  --zemios-violet-700: #6d28d9;
+  --zemios-violet-800: #5b21b6;
+  --zemios-violet-900: #4c1d95;
+  --zemios-violet-950: #2e1065;
+
+  /* ── Brand · Gold (highlight) ───────────────────────────────── */
+  --zemios-gold-50:  #fffbeb;
+  --zemios-gold-100: #fef3c7;
+  --zemios-gold-200: #fde68a;
+  --zemios-gold-300: #fcd34d;
+  --zemios-gold-400: #fbbf24;
+  --zemios-gold-500: #f59e0b;
+  --zemios-gold-600: #d97706;
+  --zemios-gold-700: #b45309;
+  --zemios-gold-800: #92400e;
+  --zemios-gold-900: #78350f;
+
+  /* ── Brand · Rose (destructive accent) ──────────────────────── */
+  --zemios-rose-50:  #fff1f2;
+  --zemios-rose-100: #ffe4e6;
+  --zemios-rose-200: #fecdd3;
+  --zemios-rose-300: #fda4af;
+  --zemios-rose-400: #fb7185;
+  --zemios-rose-500: #f43f5e;
+  --zemios-rose-600: #e11d48;
+  --zemios-rose-700: #be123c;
+
+  /* ── Brand · Slate (neutrals) ───────────────────────────────── */
+  --zemios-slate-50:  #f8fafc;
+  --zemios-slate-100: #f1f5f9;
+  --zemios-slate-200: #e2e8f0;
+  --zemios-slate-300: #cbd5e1;
+  --zemios-slate-400: #94a3b8;
+  --zemios-slate-500: #64748b;
+  --zemios-slate-600: #475569;
+  --zemios-slate-700: #334155;
+  --zemios-slate-800: #1e293b;
+  --zemios-slate-900: #0f172a;
+  --zemios-slate-950: #020617;
+
+  /* ── Brand · Neon (premium landing palette) ─────────────────── */
+  --zemios-neon-cyan:    #06b6d4;
+  --zemios-neon-purple:  #8b5cf6;
+  --zemios-neon-magenta: #d946ef;
+  --zemios-neon-orange:  #fb923c;
+  --zemios-neon-red:     #ef4444;
+  --zemios-neon-yellow:  #facc15;
+
+  /* ── Semantic · Surfaces (light) ────────────────────────────── */
+  --zemios-surface-body:    #f4f2ee;
+  --zemios-surface-base:    #ffffff;
+  --zemios-surface-raised:  #f8fafc;
+  --zemios-surface-overlay: #f1f5f9;
+  --zemios-surface-inset:   #e2e8f0;
+  --zemios-surface-inverse: #0f172a;
+
+  /* ── Semantic · Text (light) ────────────────────────────────── */
+  --zemios-text-primary:   #0f172a;
+  --zemios-text-secondary: #475569;
+  --zemios-text-muted:     #94a3b8;
+  --zemios-text-inverse:   #f8fafc;
+  --zemios-text-on-brand:  #ffffff;
+  --zemios-text-link:      #0ea5e9;
+
+  /* ── Semantic · Borders (light) ─────────────────────────────── */
+  --zemios-border-subtle:  #f1f5f9;
+  --zemios-border-default: #e2e8f0;
+  --zemios-border-strong:  #cbd5e1;
+  --zemios-border-focus:   #0ea5e9;
+  --zemios-border-glass:   rgba(148, 163, 184, 0.3);
+
+  /* ── Semantic · Feedback (light) ────────────────────────────── */
+  --zemios-success:    #10b981;
+  --zemios-success-bg: #d1fae5;
+  --zemios-warning:    #f59e0b;
+  --zemios-warning-bg: #fef3c7;
+  --zemios-error:      #ef4444;
+  --zemios-error-bg:   #fee2e2;
+  --zemios-info:       #3b82f6;
+  --zemios-info-bg:    #dbeafe;
+
+  /* ── Semantic · Brand roles (light) ─────────────────────────── */
+  --zemios-primary:        var(--zemios-sky-500);
+  --zemios-primary-hover:  var(--zemios-sky-600);
+  --zemios-primary-active: var(--zemios-sky-700);
+  --zemios-primary-subtle: var(--zemios-sky-100);
+  --zemios-accent:         var(--zemios-violet-500);
+  --zemios-accent-hover:   var(--zemios-violet-600);
+  --zemios-highlight:      var(--zemios-gold-400);
+
+  /* ── Gradients ──────────────────────────────────────────────── */
+  --zemios-gradient-brand:
+    linear-gradient(135deg, var(--zemios-primary), var(--zemios-accent));
+  --zemios-gradient-sunset:
+    linear-gradient(135deg, var(--zemios-violet-500), var(--zemios-gold-400));
+  --zemios-gradient-ocean:
+    linear-gradient(135deg, var(--zemios-sky-500), var(--zemios-violet-500));
+  --zemios-gradient-neon:
+    linear-gradient(
+      135deg,
+      var(--zemios-neon-cyan),
+      var(--zemios-neon-purple),
+      var(--zemios-neon-magenta)
+    );
+  --zemios-gradient-radial:
+    radial-gradient(circle at 30% 0%, var(--zemios-sky-100), transparent 50%);
+  --zemios-gradient-text:
+    linear-gradient(135deg, var(--zemios-sky-400), var(--zemios-violet-400));
+
+  /* ── Spacing ────────────────────────────────────────────────── */
+  --zemios-space-0:   0;
+  --zemios-space-px:  1px;
+  --zemios-space-0\.5: 0.125rem;
+  --zemios-space-1:   0.25rem;
+  --zemios-space-1\.5: 0.375rem;
+  --zemios-space-2:   0.5rem;
+  --zemios-space-2\.5: 0.625rem;
+  --zemios-space-3:   0.75rem;
+  --zemios-space-4:   1rem;
+  --zemios-space-5:   1.25rem;
+  --zemios-space-6:   1.5rem;
+  --zemios-space-8:   2rem;
+  --zemios-space-10:  2.5rem;
+  --zemios-space-12:  3rem;
+  --zemios-space-16:  4rem;
+  --zemios-space-20:  5rem;
+  --zemios-space-24:  6rem;
+
+  /* ── Radius ─────────────────────────────────────────────────── */
+  --zemios-radius-none:  0;
+  --zemios-radius-xs:    0.25rem;
+  --zemios-radius-sm:    0.5rem;
+  --zemios-radius-md:    0.75rem;
+  --zemios-radius-lg:    1rem;
+  --zemios-radius-xl:    1.25rem;
+  --zemios-radius-2xl:   1.5rem;
+  --zemios-radius-3xl:   2rem;
+  --zemios-radius-full:  9999px;
+  --zemios-radius-card:    var(--zemios-radius-2xl);
+  --zemios-radius-control: var(--zemios-radius-lg);
+
+  /* ── Elevation ──────────────────────────────────────────────── */
+  --zemios-shadow-none:   none;
+  --zemios-shadow-xs:
+    0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --zemios-shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.03);
+  --zemios-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --zemios-shadow-lg:
+    0 10px 20px -3px rgb(0 0 0 / 0.08), 0 4px 6px -2px rgb(0 0 0 / 0.04);
+  --zemios-shadow-xl:
+    0 20px 40px -5px rgb(0 0 0 / 0.10), 0 8px 16px -6px rgb(0 0 0 / 0.06);
+  --zemios-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.18);
+  --zemios-shadow-glow:        0 0 20px 0 rgb(14 165 233 / 0.20);
+  --zemios-shadow-glow-accent: 0 0 20px 0 rgb(139 92 246 / 0.20);
+  --zemios-shadow-ring:        0 0 0 4px rgb(14 165 233 / 0.15);
+
+  /* ── Typography ─────────────────────────────────────────────── */
+  --zemios-font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --zemios-font-body: 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --zemios-font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace,
+    SFMono-Regular, Menlo, monospace;
+
+  --zemios-text-xs:    0.75rem;
+  --zemios-text-sm:    0.875rem;
+  --zemios-text-base:  1rem;
+  --zemios-text-lg:    1.125rem;
+  --zemios-text-xl:    1.25rem;
+  --zemios-text-2xl:   1.5rem;
+  --zemios-text-3xl:   1.875rem;
+  --zemios-text-4xl:   2.25rem;
+  --zemios-text-5xl:   3rem;
+  --zemios-text-6xl:   3.75rem;
+  --zemios-text-7xl:   4.5rem;
+
+  /* ── Motion ─────────────────────────────────────────────────── */
+  --zemios-duration-instant:  100ms;
+  --zemios-duration-fast:     150ms;
+  --zemios-duration-base:     200ms;
+  --zemios-duration-moderate: 300ms;
+  --zemios-duration-slow:     400ms;
+  --zemios-duration-slower:   600ms;
+  --zemios-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --zemios-easing-ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --zemios-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --zemios-easing-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Layout ─────────────────────────────────────────────────── */
+  --zemios-content-max:    1200px;
+  --zemios-content-narrow: 720px;
+  --zemios-content-wide:   1400px;
+
+  /* ── Z-index scale ──────────────────────────────────────────── */
+  --zemios-z-base:     1;
+  --zemios-z-header:   100;
+  --zemios-z-dropdown: 1000;
+  --zemios-z-overlay:  1200;
+  --zemios-z-modal:    2000;
+  --zemios-z-popover:  3000;
+  --zemios-z-toast:    4000;
+}
+
+/* ── Dark theme ─────────────────────────────────────────────────── */
+[data-theme='dark'],
+.dark {
+  --zemios-surface-body:    #020617;
+  --zemios-surface-base:    #0f172a;
+  --zemios-surface-raised:  #1e293b;
+  --zemios-surface-overlay: #334155;
+  --zemios-surface-inset:   #1e293b;
+  --zemios-surface-inverse: #f8fafc;
+
+  --zemios-text-primary:   #f8fafc;
+  --zemios-text-secondary: #cbd5e1;
+  --zemios-text-muted:     #94a3b8;
+  --zemios-text-inverse:   #0f172a;
+  --zemios-text-on-brand:  #020617;
+  --zemios-text-link:      #38bdf8;
+
+  --zemios-border-subtle:  #334155;
+  --zemios-border-default: #475569;
+  --zemios-border-strong:  #64748b;
+  --zemios-border-focus:   #38bdf8;
+  --zemios-border-glass:   rgba(148, 163, 184, 0.15);
+
+  --zemios-success:    #4ade80;
+  --zemios-success-bg: #064e3b;
+  --zemios-warning:    #fbbf24;
+  --zemios-warning-bg: #78350f;
+  --zemios-error:      #f87171;
+  --zemios-error-bg:   #7f1d1d;
+  --zemios-info:       #60a5fa;
+  --zemios-info-bg:    #1e3a8a;
+
+  --zemios-primary:        var(--zemios-sky-400);
+  --zemios-primary-hover:  var(--zemios-sky-300);
+  --zemios-primary-active: var(--zemios-sky-500);
+  --zemios-primary-subtle: var(--zemios-sky-900);
+  --zemios-accent:         var(--zemios-violet-400);
+  --zemios-accent-hover:   var(--zemios-violet-300);
+  --zemios-highlight:      var(--zemios-gold-300);
+
+  --zemios-shadow-xs:
+    0 1px 2px 0 rgb(0 0 0 / 0.30);
+  --zemios-shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.30), 0 1px 2px -1px rgb(0 0 0 / 0.25);
+  --zemios-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.35), 0 2px 4px -2px rgb(0 0 0 / 0.25);
+  --zemios-shadow-lg:
+    0 10px 20px -3px rgb(0 0 0 / 0.45), 0 4px 6px -2px rgb(0 0 0 / 0.30);
+  --zemios-shadow-xl:
+    0 20px 40px -5px rgb(0 0 0 / 0.50), 0 8px 16px -6px rgb(0 0 0 / 0.35);
+  --zemios-shadow-2xl:    0 25px 50px -12px rgb(0 0 0 / 0.65);
+  --zemios-shadow-glow:        0 0 20px 0 rgb(56 189 248 / 0.18);
+  --zemios-shadow-glow-accent: 0 0 20px 0 rgb(167 139 250 / 0.18);
+  --zemios-shadow-ring:        0 0 0 4px rgb(56 189 248 / 0.20);
+}
+
+/* ── Neon theme (premium landings, dark hero aesthetic) ──────────── */
+[data-theme='neon'] {
+  --zemios-surface-body:    #020617;
+  --zemios-surface-base:    #0f172a;
+  --zemios-surface-raised:  #1e293b;
+  --zemios-surface-overlay: #334155;
+
+  --zemios-text-primary:   #f8fafc;
+  --zemios-text-secondary: #e2e8f0;
+  --zemios-text-muted:     #94a3b8;
+
+  --zemios-primary:    var(--zemios-neon-cyan);
+  --zemios-accent:     var(--zemios-neon-magenta);
+  --zemios-highlight:  var(--zemios-neon-yellow);
+
+  --zemios-border-subtle:  rgba(255, 255, 255, 0.05);
+  --zemios-border-default: rgba(148, 163, 184, 0.30);
+  --zemios-border-strong:  rgba(148, 163, 184, 0.60);
+
+  --zemios-shadow-glow: 0 0 25px rgba(6, 182, 212, 0.25);
+}
+
+/* ── Base reset that complements Tailwind preflight ──────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--zemios-font-body);
+  font-size: var(--zemios-text-base);
+  line-height: 1.5;
+  color: var(--zemios-text-primary);
+  background: var(--zemios-surface-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--zemios-text-link);
+  text-decoration: none;
+  transition: color var(--zemios-duration-fast) var(--zemios-easing-default);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Utility: brand-gradient text ───────────────────────────────── */
+.z-text-gradient {
+  background: var(--zemios-gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.z-text-brand-gradient {
+  background: var(--zemios-gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.z-text-sunset-gradient {
+  background: var(--zemios-gradient-sunset);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Animations shipped with the tokens ───────────────────────────── */
+@keyframes zemios-float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes zemios-float-slower {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px);
+  }
+}
+@keyframes zemios-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes zemios-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Backwards-compat aliases (kept during migration period)
+   Existing components from older versions referenced --nebula-*
+   and --zds-* variables. These aliases let consumers upgrade
+   to the new tokens package without a hard cut-over.
+   ───────────────────────────────────────────────────────────────── */
+:root {
+  --nebula-sky-50:  var(--zemios-sky-50);
+  --nebula-sky-100: var(--zemios-sky-100);
+  --nebula-sky-200: var(--zemios-sky-200);
+  --nebula-sky-300: var(--zemios-sky-300);
+  --nebula-sky-400: var(--zemios-sky-400);
+  --nebula-sky-500: var(--zemios-sky-500);
+  --nebula-sky-600: var(--zemios-sky-600);
+  --nebula-sky-700: var(--zemios-sky-700);
+  --nebula-sky-800: var(--zemios-sky-800);
+  --nebula-sky-900: var(--zemios-sky-900);
+  --nebula-sky-950: var(--zemios-sky-950);
+
+  --nebula-violet-50:  var(--zemios-violet-50);
+  --nebula-violet-100: var(--zemios-violet-100);
+  --nebula-violet-200: var(--zemios-violet-200);
+  --nebula-violet-300: var(--zemios-violet-300);
+  --nebula-violet-400: var(--zemios-violet-400);
+  --nebula-violet-500: var(--zemios-violet-500);
+  --nebula-violet-600: var(--zemios-violet-600);
+  --nebula-violet-700: var(--zemios-violet-700);
+  --nebula-violet-800: var(--zemios-violet-800);
+  --nebula-violet-900: var(--zemios-violet-900);
+  --nebula-violet-950: var(--zemios-violet-950);
+
+  --nebula-gold-50:  var(--zemios-gold-50);
+  --nebula-gold-100: var(--zemios-gold-100);
+  --nebula-gold-200: var(--zemios-gold-200);
+  --nebula-gold-300: var(--zemios-gold-300);
+  --nebula-gold-400: var(--zemios-gold-400);
+  --nebula-gold-500: var(--zemios-gold-500);
+  --nebula-gold-600: var(--zemios-gold-600);
+  --nebula-gold-700: var(--zemios-gold-700);
+  --nebula-gold-800: var(--zemios-gold-800);
+  --nebula-gold-900: var(--zemios-gold-900);
+
+  --nebula-rose-50:  var(--zemios-rose-50);
+  --nebula-rose-100: var(--zemios-rose-100);
+  --nebula-rose-200: var(--zemios-rose-200);
+  --nebula-rose-300: var(--zemios-rose-300);
+  --nebula-rose-400: var(--zemios-rose-400);
+  --nebula-rose-500: var(--zemios-rose-500);
+  --nebula-rose-600: var(--zemios-rose-600);
+  --nebula-rose-700: var(--zemios-rose-700);
+
+  --nebula-surface-body:    var(--zemios-surface-body);
+  --nebula-surface-base:    var(--zemios-surface-base);
+  --nebula-surface-raised:  var(--zemios-surface-raised);
+  --nebula-surface-overlay: var(--zemios-surface-overlay);
+  --nebula-surface-inset:   var(--zemios-surface-inset);
+  --nebula-surface-inverse: var(--zemios-surface-inverse);
+
+  --nebula-text-primary:   var(--zemios-text-primary);
+  --nebula-text-secondary: var(--zemios-text-secondary);
+  --nebula-text-muted:     var(--zemios-text-muted);
+  --nebula-text-inverse:   var(--zemios-text-inverse);
+  --nebula-text-on-brand:  var(--zemios-text-on-brand);
+  --nebula-text-link:      var(--zemios-text-link);
+
+  --nebula-border-subtle:  var(--zemios-border-subtle);
+  --nebula-border-default: var(--zemios-border-default);
+  --nebula-border-strong:  var(--zemios-border-strong);
+  --nebula-border-focus:   var(--zemios-border-focus);
+
+  --nebula-success:    var(--zemios-success);
+  --nebula-success-bg: var(--zemios-success-bg);
+  --nebula-warning:    var(--zemios-warning);
+  --nebula-warning-bg: var(--zemios-warning-bg);
+  --nebula-error:      var(--zemios-error);
+  --nebula-error-bg:   var(--zemios-error-bg);
+  --nebula-info:       var(--zemios-info);
+  --nebula-info-bg:    var(--zemios-info-bg);
+
+  --nebula-primary:        var(--zemios-primary);
+  --nebula-primary-hover:  var(--zemios-primary-hover);
+  --nebula-primary-active: var(--zemios-primary-active);
+  --nebula-primary-subtle: var(--zemios-primary-subtle);
+  --nebula-accent:         var(--zemios-accent);
+  --nebula-accent-hover:   var(--zemios-accent-hover);
+  --nebula-highlight:      var(--zemios-highlight);
+
+  --nebula-gradient-brand:  var(--zemios-gradient-brand);
+  --nebula-gradient-sunset: var(--zemios-gradient-sunset);
+  --nebula-gradient-ocean:  var(--zemios-gradient-ocean);
+  --nebula-gradient-radial: var(--zemios-gradient-radial);
+
+  --nebula-font-display: var(--zemios-font-display);
+  --nebula-font-body:    var(--zemios-font-body);
+  --nebula-font-mono:    var(--zemios-font-mono);
+
+  --nebula-radius-card:    var(--zemios-radius-card);
+  --nebula-radius-control: var(--zemios-radius-control);
+
+  --nebula-z-base:     var(--zemios-z-base);
+  --nebula-z-header:   var(--zemios-z-header);
+  --nebula-z-dropdown: var(--zemios-z-dropdown);
+  --nebula-z-overlay:  var(--zemios-z-overlay);
+  --nebula-z-modal:    var(--zemios-z-modal);
+  --nebula-z-popover:  var(--zemios-z-popover);
+  --nebula-z-toast:    var(--zemios-z-toast);
+
+  /* --zds-* mapping (was the legacy @zemios/design-system name) */
+  --zds-brand-primary:       var(--zemios-primary);
+  --zds-brand-primary-hover: var(--zemios-primary-hover);
+  --zds-brand-accent:        var(--zemios-accent);
+  --zds-brand-accent-hover:  var(--zemios-accent-hover);
+  --zds-brand-gold:          var(--zemios-highlight);
+
+  --zds-neon-cyan:    var(--zemios-neon-cyan);
+  --zds-neon-magenta: var(--zemios-neon-magenta);
+  --zds-neon-purple:  var(--zemios-neon-purple);
+
+  --zds-surface-body:    var(--zemios-surface-body);
+  --zds-surface-base:    var(--zemios-surface-base);
+  --zds-surface-raised:  var(--zemios-surface-raised);
+  --zds-surface-overlay: var(--zemios-surface-overlay);
+  --zds-surface-inset:   var(--zemios-surface-inset);
+
+  --zds-text-primary:   var(--zemios-text-primary);
+  --zds-text-secondary: var(--zemios-text-secondary);
+  --zds-text-muted:     var(--zemios-text-muted);
+  --zds-text-inverse:   var(--zemios-text-inverse);
+  --zds-text-on-brand:  var(--zemios-text-on-brand);
+
+  --zds-border-subtle:  var(--zemios-border-subtle);
+  --zds-border-default: var(--zemios-border-default);
+  --zds-border-strong:  var(--zemios-border-strong);
+
+  --zds-radius-none:  var(--zemios-radius-none);
+  --zds-radius-sm:    var(--zemios-radius-sm);
+  --zds-radius-md:    var(--zemios-radius-md);
+  --zds-radius-lg:    var(--zemios-radius-lg);
+  --zds-radius-xl:    var(--zemios-radius-xl);
+  --zds-radius-2xl:   var(--zemios-radius-2xl);
+  --zds-radius-full:  var(--zemios-radius-full);
+
+  --zds-shadow-none:  var(--zemios-shadow-none);
+  --zds-shadow-xs:    var(--zemios-shadow-xs);
+  --zds-shadow-sm:    var(--zemios-shadow-sm);
+  --zds-shadow-md:    var(--zemios-shadow-md);
+  --zds-shadow-lg:    var(--zemios-shadow-lg);
+  --zds-shadow-xl:    var(--zemios-shadow-xl);
+  --zds-shadow-glow:  var(--zemios-shadow-glow);
+
+  --zds-duration-instant:  var(--zemios-duration-instant);
+  --zds-duration-fast:     var(--zemios-duration-fast);
+  --zds-duration-base:     var(--zemios-duration-base);
+  --zds-duration-moderate: var(--zemios-duration-moderate);
+  --zds-duration-slow:     var(--zemios-duration-slow);
+  --zds-duration-slower:   var(--zemios-duration-slower);
+  --zds-easing-default: var(--zemios-easing-default);
+  --zds-easing-ease-in:  var(--zemios-easing-ease-in);
+  --zds-easing-ease-out: var(--zemios-easing-ease-out);
+  --zds-easing-bounce:   var(--zemios-easing-bounce);
+
+  --zds-font-display: var(--zemios-font-display);
+  --zds-font-body:    var(--zemios-font-body);
+  --zds-font-mono:    var(--zemios-font-mono);
+
+  --zds-gradient-brand: var(--zemios-gradient-brand);
+  --zds-gradient-neon:  var(--zemios-gradient-neon);
+}

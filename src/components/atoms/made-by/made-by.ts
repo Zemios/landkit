@@ -10,7 +10,7 @@ export type MadeByTheme = 'light' | 'dark'
  *
  * - `plain` (default): minimal text link, opacity 0.55, suitable for
  *   sidebars and inline footers where you want the badge to blend
- *   into the page chrome. This was the original look.
+ *   into the page chrome.
  * - `pill`: the rounded pill with a heart icon, a "with love" word in
  *   the brand rose colour, and a hover-state that lifts the background
  *   opacity. Suited for marketing-page footers on a dark surface.
@@ -19,9 +19,9 @@ export type MadeByTheme = 'light' | 'dark'
  * default (rose-400 works on both light and dark backgrounds). `dark`
  * lightens the heart to a softer rose-300 and bumps the link weight.
  *
- * Backwards compat: existing consumers (Chronos, Even2Me, Courses)
- * render `<z-made-by></z-made-by>` and get the original `plain` +
- * `light` look because both inputs default to their initial values.
+ * Every colour / radius / shadow in the component is sourced from
+ * `var(--zemios-*)` so it stays on brand automatically under any
+ * theme (light, dark or neon).
  */
 @Component({
   selector: 'z-made-by',
@@ -57,10 +57,10 @@ export type MadeByTheme = 'light' | 'dark'
     `
       /* ===== Shared ===== */
       .z-made-by {
-        font-family: inherit;
+        font-family: var(--zemios-font-body);
         color: inherit;
         text-decoration: none;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--zemios-duration-moderate) var(--zemios-easing-default);
       }
 
       /* ===== plain (default) — minimal text link ===== */
@@ -68,9 +68,9 @@ export type MadeByTheme = 'light' | 'dark'
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.35em;
-        padding: 0.75rem 0;
-        font-size: 0.8rem;
+        gap: var(--zemios-space-1);
+        padding: var(--zemios-space-3) 0;
+        font-size: var(--zemios-text-sm);
         letter-spacing: 0.04em;
         opacity: 0.55;
       }
@@ -84,7 +84,7 @@ export type MadeByTheme = 'light' | 'dark'
         color: inherit;
         font-weight: 600;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        transition: opacity var(--zemios-duration-fast) var(--zemios-easing-default);
       }
       .z-made-by--plain .z-made-by__link:hover {
         opacity: 1;
@@ -95,45 +95,46 @@ export type MadeByTheme = 'light' | 'dark'
       .z-made-by--pill {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.875rem;
-        border-radius: 9999px;
-        font-size: 0.8rem;
-        background: rgba(15, 23, 42, 0.7);
-        color: #e2e8f0;
+        gap: var(--zemios-space-2);
+        padding: var(--zemios-space-2) var(--zemios-space-3\.5);
+        border-radius: var(--zemios-radius-full);
+        font-size: var(--zemios-text-sm);
+        background: var(--zemios-slate-900);
+        color: var(--zemios-slate-200);
         min-height: 44px;
+        backdrop-filter: blur(8px);
       }
       .z-made-by--pill:hover {
-        background: rgba(15, 23, 42, 0.85);
+        background: var(--zemios-slate-950);
       }
       .z-made-by--pill .z-made-by__heart {
         width: 0.875rem;
         height: 0.875rem;
-        color: #fb7185; /* rose-400 */
+        color: var(--zemios-rose-400);
         flex-shrink: 0;
       }
       .z-made-by--pill .z-made-by__copy {
         display: inline-flex;
         align-items: baseline;
-        gap: 0.25rem;
+        gap: var(--zemios-space-1);
         flex-wrap: wrap;
       }
       .z-made-by--pill .z-made-by__love {
-        color: #fb7185;
+        color: var(--zemios-rose-400);
         font-weight: 500;
       }
       .z-made-by--pill .z-made-by__brand {
-        color: #ffffff;
+        color: var(--zemios-text-inverse);
         font-weight: 600;
       }
 
       /* Dark theme: lift the heart to rose-300 for better contrast. */
       .z-made-by--pill.z-made-by--dark .z-made-by__heart,
       .z-made-by--pill.z-made-by--dark .z-made-by__love {
-        color: #fda4af;
+        color: var(--zemios-rose-300);
       }
-    `
-  ]
+    `,
+  ],
 })
 export class MadeByComponent {
   @Input() variant: MadeByVariant = 'plain'

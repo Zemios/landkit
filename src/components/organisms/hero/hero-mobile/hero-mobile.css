@@ -1,18 +1,21 @@
+/* === HERO MOBILE SECTION ========================================= */
+/* Token-driven; every value reads from var(--zemios-*) */
+
 :host {
   display: block;
 }
 
 .hero-mobile-section {
-  background: #020617;
+  background: var(--zemios-slate-950);
 }
 
 /* Hero Logo */
 .hero-logo {
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
-  animation: logo-breathe 4s ease-in-out infinite;
+  animation: zemios-logo-breathe 4s ease-in-out infinite;
 }
 
-@keyframes logo-breathe {
+@keyframes zemios-logo-breathe {
   0%,
   100% {
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
@@ -30,15 +33,15 @@
 }
 
 .orb-purple {
-  background: radial-gradient(circle, rgba(168, 85, 247, 1) 0%, rgba(139, 92, 246, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-violet-500) 0%, transparent 70%);
 }
 
 .orb-cyan {
-  background: radial-gradient(circle, rgba(6, 182, 212, 1) 0%, rgba(8, 145, 178, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-neon-cyan) 0%, transparent 70%);
 }
 
 .orb-magenta {
-  background: radial-gradient(circle, rgba(217, 70, 239, 1) 0%, rgba(192, 38, 211, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-neon-magenta) 0%, transparent 70%);
 }
 
 /* Warm Orbs */
@@ -49,32 +52,99 @@
 }
 
 .orb-orange {
-  background: radial-gradient(circle, rgba(251, 146, 60, 1) 0%, rgba(249, 115, 22, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-neon-orange) 0%, transparent 70%);
 }
 
 .orb-red {
-  background: radial-gradient(circle, rgba(239, 68, 68, 1) 0%, rgba(220, 38, 38, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-rose-500) 0%, transparent 70%);
 }
 
 .orb-yellow {
-  background: radial-gradient(circle, rgba(250, 204, 21, 1) 0%, rgba(234, 179, 8, 0) 70%);
+  background: radial-gradient(circle, var(--zemios-gold-400) 0%, transparent 70%);
+}
+
+/* Hero mobile badge */
+.hero-mobile-badge {
+  display: inline-block;
+  margin-bottom: var(--zemios-space-6);
+  padding: var(--zemios-space-1) var(--zemios-space-3);
+  border-radius: var(--zemios-radius-full);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--zemios-slate-400);
+  font-family: var(--zemios-font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+/* Hero mobile headline */
+.hero-mobile-headline {
+  margin: 0 auto var(--zemios-space-5);
+  font-family: var(--zemios-font-display);
+  font-size: var(--zemios-text-3xl);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--zemios-text-inverse);
+}
+
+/* Hero mobile subtitle */
+.hero-mobile-subtitle {
+  margin: 0 auto;
+  max-width: 24rem;
+  font-family: var(--zemios-font-display);
+  font-size: var(--zemios-text-base);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--zemios-slate-400);
+}
+
+/* Hero mobile scroll indicator */
+.hero-mobile-scroll {
+  position: absolute;
+  bottom: var(--zemios-space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--zemios-space-2);
+  opacity: 0.4;
+}
+.hero-mobile-scroll__label {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--zemios-slate-500);
+  text-transform: uppercase;
 }
 
 /* Floating Animations */
 .animate-float-slow {
-  animation: float 6s ease-in-out infinite;
+  animation: zemios-float-slow 6s ease-in-out infinite;
 }
 
 .animate-float-slower {
-  animation: float 8s ease-in-out infinite reverse;
+  animation: zemios-float-slower 8s ease-in-out infinite reverse;
 }
 
-@keyframes float {
+@keyframes zemios-float-slow {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes zemios-float-slower {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px);
   }
 }

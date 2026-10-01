@@ -18,9 +18,9 @@ export type PhoneMockupTilt = 'none' | 'left' | 'right'
  * - [zPhoneTabbar]: optional tabbar pinned at the bottom of the
  *   screen.
  *
- * The component is self-contained: it ships its own scoped styles,
- * so it works in any app regardless of the consumer's CSS framework
- * (no Tailwind utility required).
+ * The component is self-contained: it ships its own scoped styles
+ * sourced from `var(--zemios-*)`, so it works in any app regardless
+ * of the consumer's CSS framework (no Tailwind utility required).
  *
  * Sizing: the frame is 180x360px on mobile and 210x420px on desktop.
  * Override via the `tilt` input to lean the phone left or right
@@ -95,13 +95,13 @@ export type PhoneMockupTilt = 'none' | 'left' | 'right'
 
       .z-phone {
         position: relative;
-        background: #0f172a;
-        border-radius: 32px;
+        background: var(--zemios-slate-900);
+        border-radius: var(--zemios-radius-3xl);
         padding: 6px;
         box-shadow:
-          0 40px 80px -20px rgba(15, 23, 42, 0.4),
-          0 12px 32px -8px rgba(15, 23, 42, 0.15);
-        transition: transform 0.3s ease;
+          0 40px 80px -20px var(--zemios-shadow-xl),
+          0 12px 32px -8px var(--zemios-shadow-md);
+        transition: transform var(--zemios-duration-moderate) var(--zemios-easing-default);
       }
       .z-phone--tilt-left {
         transform: rotate(-12deg);
@@ -121,8 +121,8 @@ export type PhoneMockupTilt = 'none' | 'left' | 'right'
         transform: translateX(-50%);
         width: 70px;
         height: 18px;
-        background: #0f172a;
-        border-radius: 999px;
+        background: var(--zemios-slate-900);
+        border-radius: var(--zemios-radius-full);
         z-index: 5;
       }
 
@@ -130,35 +130,39 @@ export type PhoneMockupTilt = 'none' | 'left' | 'right'
         position: relative;
         width: 100%;
         height: 100%;
-        border-radius: 26px;
+        border-radius: var(--zemios-radius-2xl);
         overflow: hidden;
-        background: linear-gradient(180deg, #fbfcfd 0%, #f1f5f9 100%);
+        background: linear-gradient(
+          180deg,
+          var(--zemios-surface-base) 0%,
+          var(--zemios-slate-100) 100%
+        );
         display: flex;
         flex-direction: column;
-        font-family: inherit;
+        font-family: var(--zemios-font-body);
       }
 
       .z-phone__status {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 1rem 0;
+        padding: var(--zemios-space-2) var(--zemios-space-4) 0;
         font-size: 0.6rem;
         font-weight: 600;
-        color: #0f172a;
+        color: var(--zemios-slate-900);
       }
       .z-phone__status-icons {
         display: flex;
         align-items: center;
-        gap: 0.35rem;
-        color: #0f172a;
+        gap: var(--zemios-space-1);
+        color: var(--zemios-slate-900);
       }
       .z-phone__status-icons svg {
         display: block;
       }
 
       .z-phone__header {
-        padding: 0.5rem 0.875rem 0.625rem;
+        padding: var(--zemios-space-2) var(--zemios-space-3\.5) var(--zemios-space-2\.5);
         min-height: 0;
       }
       .z-phone__header:empty {
@@ -181,8 +185,8 @@ export type PhoneMockupTilt = 'none' | 'left' | 'right'
       .z-phone__tabbar:empty {
         display: none;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class PhoneMockupComponent {
   @Input() width = 210

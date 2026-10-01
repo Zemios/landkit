@@ -1,31 +1,118 @@
-import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, PLATFORM_ID } from '@angular/core'
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core'
 import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
 
+/**
+ * FeaturesGridComponent
+ *
+ * Token-driven feature / value-prop grid. The default grid ships with
+ * three generic feature rows (scalable / connected / secure) that can
+ * be replaced via the `features` input.
+ *
+ * Each row pairs a Lottie animation slot with a title, description
+ * and a subtle separator. All sizing, colour and typography come
+ * from `var(--zemios-*)`.
+ */
 @Component({
   selector: 'z-features-grid',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './features-grid.html',
   styles: [
     `
+      :host {
+        display: block;
+      }
+
+      .z-features-grid {
+        position: relative;
+        overflow: hidden;
+        padding: var(--zemios-space-24) 0;
+      }
+
+      .z-features-grid__inner {
+        max-width: var(--zemios-content-wide);
+        margin: 0 auto;
+        padding: 0 var(--zemios-space-6);
+      }
+
+      .z-features-grid__grid {
+        display: grid;
+        gap: var(--zemios-space-16);
+        grid-template-columns: 1fr;
+      }
+
       @media (min-width: 768px) {
-        .features-grid {
-          grid-template-columns: repeat(3, 1fr) !important;
+        .z-features-grid__grid {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
-      .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
-        border-color: rgba(255, 255, 255, 0.1) !important;
+
+      .z-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
-      dotlottie-wc {
+
+      .z-feature__icon {
+        width: 200px;
+        height: 200px;
+        margin-bottom: var(--zemios-space-8);
+        border-radius: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .z-feature__icon dotlottie-wc {
         width: 100%;
         height: 100%;
       }
-    `
-  ]
+
+      .z-feature__title {
+        margin: 0 0 var(--zemios-space-3\.5);
+        font-family: var(--zemios-font-display);
+        font-size: var(--zemios-text-xl);
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--zemios-text-inverse);
+        letter-spacing: -0.01em;
+      }
+
+      .z-feature__description {
+        margin: 0;
+        max-width: 24rem;
+        font-family: var(--zemios-font-body);
+        font-size: var(--zemios-text-sm);
+        line-height: 1.75;
+        font-weight: 300;
+        color: var(--zemios-slate-500);
+      }
+
+      .z-feature__separator {
+        width: 40px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.06);
+        margin-top: var(--zemios-space-12);
+      }
+
+      .z-feature:hover {
+        transform: translateY(-4px);
+        transition: transform var(--zemios-duration-base) var(--zemios-easing-default);
+      }
+    `,
+  ],
 })
 export class FeaturesGridComponent implements AfterViewInit {
   private isBrowser: boolean
@@ -36,22 +123,22 @@ export class FeaturesGridComponent implements AfterViewInit {
       title: 'features.scalable.title',
       description: 'features.scalable.description',
       rgbColor: '96,165,250',
-      delay: 100
+      delay: 100,
     },
     {
       lottieFile: 'lotties/system.lottie',
       title: 'features.connected.title',
       description: 'features.connected.description',
       rgbColor: '167,139,250',
-      delay: 200
+      delay: 200,
     },
     {
       lottieFile: 'lotties/secure.lottie',
       title: 'features.secure.title',
       description: 'features.secure.description',
       rgbColor: '196,181,253',
-      delay: 300
-    }
+      delay: 300,
+    },
   ]
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
