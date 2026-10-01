@@ -1,8 +1,13 @@
 # Zemios Design Guide
 
-> The complete guide to the Zemios design system. Every Zemios
-> product — Atlas, Edubot, Cronos, Nebula, Even2Me, Minerva and
+> The complete guide to the Zemios design system. The intent is that every
+> Zemios product — Atlas, Edubot, Cronos, Nebula, Even2Me, Minerva and
 > whatever we ship next — consumes this guide through `@zemios/landkit`.
+>
+> In practice the package is installed today by `Atlas` and `even2me`
+> (`apps/web-social`). The other products still carry their own copies of
+> these components, so treat the rules below as the intended standard rather
+> than something already enforced everywhere.
 
 This is the single document that explains **what the Zemios brand is,
 how we keep it consistent, and how to use the kit**. If you only read
@@ -38,7 +43,7 @@ lives at [`src/tokens/zemios.css`](./src/tokens/zemios.css) and is
 imported once at the top of the consumer's `styles.css`:
 
 ```css
-@import '@zemios/landkit/tokens.css';
+@import '@zemios/landkit/tokens';
 ```
 
 After that, every component, template and `style=""` attribute can
@@ -233,11 +238,11 @@ The summary:
 ## 5. How to build a new Zemios product
 
 1. **Create the project.** Any Angular 21+ project. Run
-   `pnpm add @zemios/landkit`.
+   `pnpm add github:Zemios/landkit#<commit-sha>`.
 2. **Import the tokens in `src/styles.css`.**
 
    ```css
-   @import '@zemios/landkit/tokens.css';
+   @import '@zemios/landkit/tokens';
    ```
 
 3. **Set up the `app.config.ts`** to provide the optional peer deps
@@ -281,17 +286,20 @@ The summary:
 
 ## 7. Migrating an existing Zemios product
 
-If you already have a Zemios project (Atlas, Cronos, Edubot, …):
+If you already have a Zemios project with its own copy of these components
+(Cronos, Edubot, …):
 
-1. Add `@zemios/landkit@latest`.
-2. Import `@zemios/landkit/tokens.css` in `src/styles.css`.
+1. Add the package from GitHub: `pnpm add github:Zemios/landkit#<commit-sha>`.
+   Pin a commit — see the "Adopting this package" section of the
+   [README](./README.md).
+2. Import `@zemios/landkit/tokens` in `src/styles.css`.
 3. Remove your local `tokens/` folder; the canonical tokens now live
    in Landkit.
 4. Replace local `z-button` / `z-card` / `z-nav-bar` copies with the
    imports from `@zemios/landkit`.
 5. The `nebula-*` and `zds-*` aliases keep working while you migrate.
-6. When everything is on Landkit, drop the alias block from your
-   `tokens.css`.
+6. When everything is on Landkit, drop the alias block from your local
+   stylesheet.
 
 ---
 

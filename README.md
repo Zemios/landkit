@@ -1,23 +1,30 @@
 # @zemios/landkit
 
-> The Zemios design system. Angular building blocks + design tokens +
-> brand primitives shared by every Zemios product — Atlas, Edubot,
-> Cronos, Nebula, even2me, minerva…
+> The Zemios design system: Angular building blocks + design tokens +
+> brand primitives, published as one Angular Package Format library.
 >
 > Like Google's design system across YouTube / Gmail / Chrome, scoped
 > to the Zemios universe.
 
-Landkit is the **single source of truth** for the Zemios brand. Every
-new Zemios product drops in this package on day one and ships with the
-same colours, the same radii, the same buttons, the same look — without
-re-implementing any of it.
+Landkit is intended to be the **single source of truth** for the Zemios
+brand, so a new product can drop it in and ship with the same colours,
+radii and buttons instead of re-implementing them.
+
+Be aware of what that intent looks like today: as of `0.4.1` this package is
+consumed by **two** projects — `Atlas` and `even2me` (`apps/web-social`).
+It is not yet adopted across the portfolio, so treat the catalogue below as
+what exists, not as a proven multi-product contract.
 
 ---
 
 ## Install
 
+This package is **not published to a public registry** (license `UNLICENSED`,
+`publishConfig.access: restricted`), so `pnpm add @zemios/landkit` will not
+resolve. Install it from GitHub instead:
+
 ```bash
-pnpm add @zemios/landkit \
+pnpm add github:Zemios/landkit \
   @angular/common @angular/core @angular/forms @angular/router \
   @ngx-translate/core
 ```
@@ -30,18 +37,69 @@ pnpm add @lottiefiles/dotlottie-wc
 
 ---
 
+## Adopting this package
+
+**You get a prebuilt artifact, not a build.** `dist/` is committed to the
+repository, and `pnpm add github:Zemios/landkit` clones that commit and hands
+you the `dist/` that is in it. Nothing is compiled on your machine and there is
+no `prepare` hook, so install is fast and needs no Angular toolchain. CI fails
+the build if `dist/` ever drifts from `src/`, so the artifact you receive
+always matches the source it was built from.
+
+If you want to build it yourself instead, clone the repo and run
+`pnpm install && pnpm build`; that regenerates `dist/` in place. `pnpm verify`
+runs the full gate locally: lint, test, build, and the dist-drift check.
+
+**Versioning.** The current version is `0.4.1`, still pre-1.0, so the
+component API and the token names can change in a patch release. Check
+`CHANGELOG`/release notes before bumping.
+
+**Pin your ref.** This is the important part. There are no git tags in this
+repository yet, so `"@zemios/landkit": "github:Zemios/landkit"` follows
+whatever `main` happens to point at. That is a moving target: a broken build
+on `main` breaks your install, and a token rename can change your styling
+without a version bump in your lockfile. Both current consumers are on the
+unpinned form today.
+
+Prefer pinning a commit:
+
+```jsonc
+"dependencies": {
+  "@zemios/landkit": "github:Zemios/landkit#<commit-sha>"
+}
+```
+
+and bumping the SHA deliberately. Re-pin when you want to pick up changes.
+
+---
+
 ## One-line setup
 
-```ts
+```css
 /* 1. Bring in the tokens (CSS custom properties) */
-@import '@zemios/landkit/tokens.css';
+@import '@zemios/landkit/tokens';
+```
 
+```ts
 /* 2. Wire up TranslateService if you use i18n */
 import { TranslateModule } from '@ngx-translate/core';
 ```
 
 That's it — every Zemios primitive you render will be on-brand. No
 Tailwind config, no per-project overrides needed.
+
+### Entry points
+
+| Import                              | Resolves to                     | What you get                          |
+|-------------------------------------|---------------------------------|---------------------------------------|
+| `@zemios/landkit`                   | `dist/fesm2022/zemios-landkit.mjs` | All components, directives, `ThemeService`, the TypeScript token mirror |
+| `@zemios/landkit/tokens`            | `dist/tokens/zemios.css`        | The `--zemios-*` custom properties (CSS) |
+| `@zemios/landkit/package.json`      | `package.json`                  | Package metadata                      |
+| `@zemios/landkit/README.md`         | `README.md`                     | This file                             |
+| `@zemios/landkit/STYLE_GUIDE.md`    | `STYLE_GUIDE.md`                | The design guide                      |
+
+There is no `@zemios/landkit/tokens.css` entry point — the stylesheet is the
+`./tokens` sub-entry itself.
 
 ---
 
@@ -166,10 +224,12 @@ ngOnInit() {
 
 ## Conventions
 
-- All components are **standalone** (Angular 17+).
+- All components are **standalone** (Angular 17+; the flag is explicit in
+  every component file even though it is the default in Angular 19+).
 - Selectors are prefixed with `z-` (e.g. `<z-hero>`, `<z-phone-mockup>`).
 - Directive selectors keep their original `app-` prefix (e.g. `[appCardHover]`).
-- Components opt into `OnPush` change detection.
+- 18 of the 21 components opt into `ChangeDetectionStrategy.OnPush`. The
+  three that do not are `z-button`, `z-hero` and `z-hero-mobile`.
 - Translation is delegated to `@ngx-translate/core`.
 - All visuals read from `var(--zemios-*)` — no hard-coded hex values
   inside component CSS.
@@ -178,18 +238,19 @@ ngOnInit() {
 
 ## Compatibility
 
-Landkit is consumed by:
+Landkit is built for Angular 21 (`^21.0.0`) and is consumed by:
 
-- [`Zemios/Atlas`](https://github.com/Zemios/Atlas) — the public
-  Zemios landing (this is where the original `z-button`, `z-card`,
-  `z-nav-bar` etc. were first defined; they now live here).
-- [`Zemios/nebula`](https://github.com/Zemios/nebula) — multi-app
-  monorepo (Chronos, Even2Me, Minerva).
-- [`Zemios/edubot`](https://github.com/Zemios/edubot), `cronos` and
-  every other Zemios product.
+- **`Atlas`** — the public Zemios landing. This is where the original
+  `z-button`, `z-card` and `z-nav-bar` were first defined; they now live here.
+- **`even2me`** (`apps/web-social`).
 
-The package keeps `--nebula-*` and `--zds-*` aliases for older
-consumers; new code should always use `--zemios-*`.
+Those two are the only projects that declare the dependency today. `edubot`,
+`cronos` and the rest of the portfolio have their own copies of these
+components and have **not** adopted the package yet, so do not assume a
+component or token here has been validated against them.
+
+The package keeps `--nebula-*` and `--zds-*` aliases for older consumers;
+new code should always use `--zemios-*`.
 
 ---
 
@@ -201,9 +262,12 @@ and consumed by multiple Zemios projects:
 ```jsonc
 // in your project's package.json
 "dependencies": {
-  "@zemios/landkit": "github:Zemios/landkit#v0.2.0"
+  "@zemios/landkit": "github:Zemios/landkit#<commit-sha>"
 }
 ```
+
+Pin a commit rather than a branch — see
+[Adopting this package](#adopting-this-package) for why.
 
 See [`STYLE_GUIDE.md`](./STYLE_GUIDE.md) for the full design guide:
 principles, accessibility, and component catalogue.
