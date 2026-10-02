@@ -1,0 +1,32 @@
+# EditorConfig: https://editorconfig.org
+# Contrato de formato del repositorio. La politica de finales de linea se
+# refleja tambien en .gitattributes, que es la que manda en el checkout.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{json,yaml,yml}]
+indent_size = 2
+
+[*.ts]
+quote_type = single
+
+[*.css]
+indent_size = 2
+
+# Ficheros generados: no se editan a mano, no se formatean.
+[dist/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+[*.md]
+max_line_length = off

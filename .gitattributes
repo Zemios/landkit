@@ -1,0 +1,25 @@
+# Normaliza finales de linea en el repositorio. Sin esto, core.autocrlf de
+# Windows convierte a CRLF en el checkout y produce diffs falsos entre
+# maquinas. Los blobs ya se guardan en LF, asi que este fichero no reescribe
+# ficheros existentes: solo fija el comportamiento de checkout futuro.
+* text=auto eol=lf
+
+# Los scripts de Windows necesitan CRLF para ejecutarse.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Lenguajes con final de linea significado.
+*.ts text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+
+# Artefactos generados: se tratan como binarios porque su contenido lo decide
+# ng-packagr, no una persona.
+dist/** linguist-generated=true -diff
+jscpd-report/** linguist-generated=true -diff
+
+# Diff legible para el bundle compilado.
+*.map linguist-generated=true -diff

@@ -10,8 +10,10 @@ pnpm-debug.log
 # (`"@zemios/landkit": "github:Zemios/landkit"`), so the committed dist/ is
 # the only artifact they receive. CI fails the build if dist/ drifts from
 # source (`pnpm build && git diff --exit-code dist`).
+# Ver ADR-0002 (docs/adr/0002-versionar-dist-para-consumo-por-git.md).
 /tmp
 /out-tsc
+/jscpd-report
 
 # IDEs and editors
 .idea/

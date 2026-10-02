@@ -1,7 +1,7 @@
 import * as i1 from '@angular/common';
 import { CommonModule, NgClass, isPlatformBrowser } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Input, Component, ChangeDetectionStrategy, EventEmitter, forwardRef, Output, HostListener, PLATFORM_ID, Inject, CUSTOM_ELEMENTS_SCHEMA, signal, effect, DOCUMENT, Injectable, Directive } from '@angular/core';
+import { Input, Component, ChangeDetectionStrategy, EventEmitter, forwardRef, Output, HostListener, inject, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA, signal, effect, DOCUMENT, Inject, Injectable, Directive } from '@angular/core';
 import * as i1$1 from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -1437,8 +1437,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.2.23", ngImpo
  * from `var(--zemios-*)`.
  */
 class FeaturesGridComponent {
-    platformId;
-    isBrowser;
+    platformId = inject(PLATFORM_ID);
+    isBrowser = isPlatformBrowser(this.platformId);
     features = [
         {
             lottieFile: 'lotties/architecture.lottie',
@@ -1462,25 +1462,18 @@ class FeaturesGridComponent {
             delay: 300,
         },
     ];
-    constructor(platformId) {
-        this.platformId = platformId;
-        this.isBrowser = isPlatformBrowser(this.platformId);
-    }
     ngAfterViewInit() {
         if (this.isBrowser) {
             import('@lottiefiles/dotlottie-wc');
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, deps: [{ token: PLATFORM_ID }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
     static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "21.2.23", type: FeaturesGridComponent, isStandalone: true, selector: "z-features-grid", ngImport: i0, template: "<!-- OUR CORE - Open layout with Lottie placeholders -->\r\n<section class=\"z-features-grid\">\r\n  <div class=\"z-features-grid__inner\">\r\n    <div class=\"z-features-grid__grid\">\r\n      @for (feature of features; track feature.title; let i = $index) {\r\n        <div\r\n          class=\"z-feature\"\r\n          data-aos=\"fade-up\"\r\n          [attr.data-aos-delay]=\"feature.delay\"\r\n        >\r\n          <!-- Lottie animation -->\r\n          <div\r\n            class=\"z-feature__icon\"\r\n            [style.--feature-rgb]=\"feature.rgbColor\"\r\n          >\r\n            <dotlottie-wc [attr.src]=\"feature.lottieFile\" autoplay loop></dotlottie-wc>\r\n          </div>\r\n\r\n          <!-- Title -->\r\n          <h3 class=\"z-feature__title\">\r\n            {{ feature.title | translate }}\r\n          </h3>\r\n\r\n          <!-- Description -->\r\n          <p class=\"z-feature__description\">\r\n            {{ feature.description | translate }}\r\n          </p>\r\n\r\n          <!-- Subtle separator (not on last item) -->\r\n          @if (!$last) {\r\n            <div class=\"z-feature__separator\"></div>\r\n          }\r\n        </div>\r\n      }\r\n    </div>\r\n  </div>\r\n</section>", styles: [":host{display:block}.z-features-grid{position:relative;overflow:hidden;padding:var(--zemios-space-24) 0}.z-features-grid__inner{max-width:var(--zemios-content-wide);margin:0 auto;padding:0 var(--zemios-space-6)}.z-features-grid__grid{display:grid;gap:var(--zemios-space-16);grid-template-columns:1fr}@media(min-width:768px){.z-features-grid__grid{grid-template-columns:repeat(3,1fr)}}.z-feature{display:flex;flex-direction:column;align-items:center;text-align:center}.z-feature__icon{width:200px;height:200px;margin-bottom:var(--zemios-space-8);border-radius:28px;display:flex;align-items:center;justify-content:center;overflow:hidden}.z-feature__icon dotlottie-wc{width:100%;height:100%}.z-feature__title{margin:0 0 var(--zemios-space-3.5);font-family:var(--zemios-font-display);font-size:var(--zemios-text-xl);font-weight:600;line-height:1.25;color:var(--zemios-text-inverse);letter-spacing:-.01em}.z-feature__description{margin:0;max-width:24rem;font-family:var(--zemios-font-body);font-size:var(--zemios-text-sm);line-height:1.75;font-weight:300;color:var(--zemios-slate-500)}.z-feature__separator{width:40px;height:1px;background:#ffffff0f;margin-top:var(--zemios-space-12)}.z-feature:hover{transform:translateY(-4px);transition:transform var(--zemios-duration-base) var(--zemios-easing-default)}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "ngmodule", type: TranslateModule }, { kind: "pipe", type: i1$2.TranslatePipe, name: "translate" }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.2.23", ngImport: i0, type: FeaturesGridComponent, decorators: [{
             type: Component,
             args: [{ selector: 'z-features-grid', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, imports: [CommonModule, TranslateModule], schemas: [CUSTOM_ELEMENTS_SCHEMA], template: "<!-- OUR CORE - Open layout with Lottie placeholders -->\r\n<section class=\"z-features-grid\">\r\n  <div class=\"z-features-grid__inner\">\r\n    <div class=\"z-features-grid__grid\">\r\n      @for (feature of features; track feature.title; let i = $index) {\r\n        <div\r\n          class=\"z-feature\"\r\n          data-aos=\"fade-up\"\r\n          [attr.data-aos-delay]=\"feature.delay\"\r\n        >\r\n          <!-- Lottie animation -->\r\n          <div\r\n            class=\"z-feature__icon\"\r\n            [style.--feature-rgb]=\"feature.rgbColor\"\r\n          >\r\n            <dotlottie-wc [attr.src]=\"feature.lottieFile\" autoplay loop></dotlottie-wc>\r\n          </div>\r\n\r\n          <!-- Title -->\r\n          <h3 class=\"z-feature__title\">\r\n            {{ feature.title | translate }}\r\n          </h3>\r\n\r\n          <!-- Description -->\r\n          <p class=\"z-feature__description\">\r\n            {{ feature.description | translate }}\r\n          </p>\r\n\r\n          <!-- Subtle separator (not on last item) -->\r\n          @if (!$last) {\r\n            <div class=\"z-feature__separator\"></div>\r\n          }\r\n        </div>\r\n      }\r\n    </div>\r\n  </div>\r\n</section>", styles: [":host{display:block}.z-features-grid{position:relative;overflow:hidden;padding:var(--zemios-space-24) 0}.z-features-grid__inner{max-width:var(--zemios-content-wide);margin:0 auto;padding:0 var(--zemios-space-6)}.z-features-grid__grid{display:grid;gap:var(--zemios-space-16);grid-template-columns:1fr}@media(min-width:768px){.z-features-grid__grid{grid-template-columns:repeat(3,1fr)}}.z-feature{display:flex;flex-direction:column;align-items:center;text-align:center}.z-feature__icon{width:200px;height:200px;margin-bottom:var(--zemios-space-8);border-radius:28px;display:flex;align-items:center;justify-content:center;overflow:hidden}.z-feature__icon dotlottie-wc{width:100%;height:100%}.z-feature__title{margin:0 0 var(--zemios-space-3.5);font-family:var(--zemios-font-display);font-size:var(--zemios-text-xl);font-weight:600;line-height:1.25;color:var(--zemios-text-inverse);letter-spacing:-.01em}.z-feature__description{margin:0;max-width:24rem;font-family:var(--zemios-font-body);font-size:var(--zemios-text-sm);line-height:1.75;font-weight:300;color:var(--zemios-slate-500)}.z-feature__separator{width:40px;height:1px;background:#ffffff0f;margin-top:var(--zemios-space-12)}.z-feature:hover{transform:translateY(-4px);transition:transform var(--zemios-duration-base) var(--zemios-easing-default)}\n"] }]
-        }], ctorParameters: () => [{ type: undefined, decorators: [{
-                    type: Inject,
-                    args: [PLATFORM_ID]
-                }] }] });
+        }] });
 
 /**
  * ProcessComponent
